@@ -1,0 +1,33 @@
+#include <iostream.h>  // Turbo C++ compatible header for input/output
+#include <conio.h>     // Turbo C++ specific header for clrscr() and getch()
+
+// Template function for addition
+template <class T>  // Use "class" instead of "typename" for compatibility
+T add(T a, T b) {
+    return a + b;
+}
+
+// Template class for Calculator
+template <class T>
+class Calculator {
+    T x, y;  // Private members x and y
+public:
+    Calculator(T a, T b) : x(a), y(b) {}  // Constructor
+    T multiply() {
+        return x * y;  // Function to multiply
+    }
+};
+
+int main() {
+    clrscr();  // Clear the screen (Turbo C++ specific)
+
+    // Template function demonstration
+    cout << "Addition: " << add(5, 10) << endl;  // Directly use integers without <int>
+
+    // Template class demonstration
+    Calculator<double> calc(3.5, 2.0);  // Template class explicitly specified
+    cout << "Multiplication: " << calc.multiply() << endl;
+
+    getch();  // Wait for a key press (Turbo C++ specific)
+    return 0;
+}
