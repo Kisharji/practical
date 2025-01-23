@@ -1,0 +1,66 @@
+#include <iostream.h> // Use <iostream.h> for Turbo C++
+#include <conio.h>    // Include <conio.h> for clrscr() and getch()
+
+// Check if a number is even or odd
+int isEven(int num) { // bool is not widely supported in Turbo C++, use int instead
+    return num % 2 == 0;
+}
+
+// Print grade based on marks
+void printGrade(int marks) {
+    if (marks >= 90)
+        cout << "Grade: A\n";
+    else if (marks >= 75)
+        cout << "Grade: B\n";
+    else if (marks >= 50)
+        cout << "Grade: C\n";
+    else
+        cout << "Grade: F\n";
+}
+
+// Find the maximum of three numbers
+int findMax(int a, int b, int c) {
+    if (a > b && a > c)
+        return a;
+    else if (b > c)
+        return b;
+    else
+        return c;
+}
+
+int main() {
+    int choice, num, a, b, c, marks;
+
+    clrscr(); // Clear the screen
+
+    cout << "Menu:\n";
+    cout << "1. Check Even/Odd\n2. Print Grade\n3. Find Maximum\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    switch (choice) {
+    case 1:
+        cout << "Enter a number: ";
+        cin >> num;
+        if (isEven(num))
+            cout << num << " is Even.\n";
+        else
+            cout << num << " is Odd.\n";
+        break;
+    case 2:
+        cout << "Enter marks: ";
+        cin >> marks;
+        printGrade(marks);
+        break;
+    case 3:
+        cout << "Enter three numbers: ";
+        cin >> a >> b >> c;
+        cout << "Maximum: " << findMax(a, b, c) << "\n";
+        break;
+    default:
+        cout << "Invalid choice!\n";
+    }
+
+    getch(); // Wait for key press before exiting
+    return 0;
+}
