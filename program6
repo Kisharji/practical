@@ -1,0 +1,35 @@
+#include<iostream.h>
+#include<conio.h>
+
+class Base {
+public:
+    virtual void display() {  // Virtual function in the Base class
+        cout << "This is the base class display function" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void display() {  // Overriding the display function in Derived class
+        cout << "This is the derived class display function" << endl;
+    }
+};
+
+int main() {
+    clrscr();  // Clear the screen (specific to Turbo C++)
+
+    Base* basePtr;       // Pointer to Base class
+    Base baseObj;        // Object of Base class
+    Derived derivedObj;  // Object of Derived class
+
+    basePtr = &baseObj;  // Point basePtr to baseObj (Base class object)
+    cout << "Calling display using base class pointer pointing to base object" << endl;
+    basePtr->display();  // Call the Base class display function
+
+    basePtr = &derivedObj;  // Point basePtr to derivedObj (Derived class object)
+    cout << "\nCalling display using base class pointer pointing to derived object" << endl;
+    basePtr->display();  // Call the Derived class display function due to virtual function
+
+    getch();  // Wait for a key press before exiting
+    return 0;
+}
