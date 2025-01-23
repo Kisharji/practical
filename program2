@@ -1,0 +1,69 @@
+#include <iostream.h> // Use <iostream.h> for Turbo C++
+#include <conio.h>    // Include <conio.h> for clrscr() and getch()
+#include <string.h>   // Include <string.h> for string manipulation functions
+
+void reverseString(char input[]) {
+    int length = strlen(input);
+    cout << "Reversed String: ";
+    for (int i = length - 1; i >= 0; i--) {
+        cout << input[i];
+    }
+    cout << endl;
+}
+
+void countVowels(char input[]) {
+    int vowels = 0;
+    for (int i = 0; input[i] != '\0'; i++) {
+        char ch = input[i];
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+            vowels++;
+        }
+    }
+    cout << "Number of Vowels: " << vowels << endl;
+}
+
+void findStringLength(char input[]) {
+    int length = 0;
+    while (input[length] != '\0') {
+        length++;
+    }
+    cout << "String Length: " << length << endl;
+}
+
+int main() {
+    char input[100]; // Use a character array instead of string
+    int choice;
+
+    clrscr(); // Clear the screen for Turbo C++
+
+    cout << "String Manipulation Options:\n";
+    cout << "1. Reverse String\n";
+    cout << "2. Count Vowels\n";
+    cout << "3. Find String Length\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    // Clear the input buffer (compatible for Turbo C++)
+    cin.ignore(100, '\n'); // Clear up to 100 characters or until a newline
+
+    cout << "Enter a string: ";
+    cin.getline(input, 100); // Use cin.getline for Turbo C++ compatibility
+
+    switch (choice) {
+    case 1:
+        reverseString(input);
+        break;
+    case 2:
+        countVowels(input);
+        break;
+    case 3:
+        findStringLength(input);
+        break;
+    default:
+        cout << "Invalid choice!" << endl;
+    }
+
+    getch(); // Wait for a key press before exiting
+    return 0;
+}
