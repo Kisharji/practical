@@ -1,0 +1,62 @@
+#include <iostream.h>  // Turbo C++ compatible header
+#include <fstream.h>   // For file handling
+#include <conio.h>     // For clrscr() and getch()
+#include <string.h>    // For string manipulation
+
+class FileManager {
+private:
+    char fileName[100]; // Use char array instead of string
+
+public:
+    // Constructor to initialize the file name
+    FileManager(const char* name) {
+        strcpy(fileName, name); // Copy the name into the fileName array
+    }
+
+    // Method to write data to the file
+    void writeToFile(const char* data) {
+        ofstream outFile(fileName, ios::app); // Open file in append mode
+        if (!outFile) { // Check if file opened successfully
+            cout << "Error: Unable to open file for writing" << endl;
+            return;
+        }
+
+        outFile << data << endl; // Write data to the file
+        outFile.close();         // Close the file
+        cout << "Data written to file successfully" << endl;
+    }
+
+    // Method to read data from the file
+    void readFromFile() {
+        ifstream inFile(fileName); // Open file for reading
+        if (!inFile) { // Check if file opened successfully
+            cout << "Error: Unable to open file for reading" << endl;
+            return;
+        }
+
+        char line[256] = {0}; // Buffer to store each line (initialized to zero)
+        cout << "Reading data from file:" << endl;
+
+        while (inFile.getline(line, sizeof(line))) { // Read each line from the file safely
+            cout << line << endl; // Print the line
+        }
+
+        inFile.close(); // Close the file
+    }
+};
+
+int main() {
+    clrscr(); // Clear the screen (Turbo C++ specific)
+
+    char fileName[] = "example.txt"; // File name
+    FileManager fileManager(fileName); // Create FileManager object
+
+    // Write data to the file
+    fileManager.writeToFile("Hello world!");
+
+    // Read data from the file
+    fileManager.readFromFile();
+
+    getch(); // Wait for a key press before exiting
+    return 0;
+}
