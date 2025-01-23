@@ -1,0 +1,92 @@
+#include <iostream.h> // Use Turbo C++ compatible header file
+#include <conio.h>    // For clrscr() and getch()
+
+// Base class
+class Person {
+public:
+    char name[50]; // Use character array instead of string
+    int age;
+
+    void inputPersonDetails() {
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter age: ";
+        cin >> age;
+    }
+
+    void displayPersonDetails() const {
+        cout << "Name: " << name << ", Age: " << age << endl;
+    }
+};
+
+// Single Inheritance
+class Student : public Person {
+public:
+    char course[50]; // Use character array instead of string
+
+    void inputStudentDetails() {
+        inputPersonDetails();
+        cout << "Enter course: ";
+        cin >> course;
+    }
+
+    void displayStudentDetails() const {
+        displayPersonDetails();
+        cout << "Course: " << course << endl;
+    }
+};
+
+// Multilevel Inheritance
+class Graduate : public Student {
+public:
+    float grade;
+
+    void inputGraduateDetails() {
+        inputStudentDetails();
+        cout << "Enter grade: ";
+        cin >> grade;
+    }
+
+    void displayGraduateDetails() const {
+        displayStudentDetails();
+        cout << "Grade: " << grade << endl;
+    }
+};
+
+// Multiple Inheritance
+class Employee : public Person {
+public:
+    char jobTitle[50]; // Use character array instead of string
+
+    void inputEmployeeDetails() {
+        inputPersonDetails();
+        cout << "Enter job title: ";
+        cin >> jobTitle;
+    }
+
+    void displayEmployeeDetails() const {
+        displayPersonDetails();
+        cout << "Job Title: " << jobTitle << endl;
+    }
+};
+
+void main() {
+    clrscr(); // Clear screen (Turbo C++ specific)
+
+    cout << "Single Inheritance Example (Student):\n";
+    Student student;
+    student.inputStudentDetails();
+    student.displayStudentDetails();
+
+    cout << "\nMultilevel Inheritance Example (Graduate):\n";
+    Graduate graduate;
+    graduate.inputGraduateDetails();
+    graduate.displayGraduateDetails();
+
+    cout << "\nMultiple Inheritance Example (Employee):\n";
+    Employee employee;
+    employee.inputEmployeeDetails();
+    employee.displayEmployeeDetails();
+
+    getch(); // Wait for key press before closing (Turbo C++ specific)
+}
