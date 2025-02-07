@@ -1,27 +1,45 @@
-10 BST
-#include<iostream>
-using namespace std;
+#include <iostream.h> // Use iostream.h for Turbo C++
+#include <conio.h>    // Include conio.h for clrscr() and getch()
+
 struct Node {
     int data;
-    Node* left, *right;
-    Node(int x) : data(x), left(nullptr), right(nullptr) {}
+    Node* left;
+    Node* right;
+    Node(int x) {
+        data = x;
+        left = NULL;
+        right = NULL;
+    }
 };
 
+// Function to insert a new node into the BST
 Node* insert(Node* root, int x) {
-    if (!root) return new Node(x);
-    if (x < root->data) root->left = insert(root->left, x);
-    else root->right = insert(root->right, x);
+    if (root == NULL) {
+        return new Node(x);
+    }
+    if (x < root->data) {
+        root->left = insert(root->left, x);
+    } else {
+        root->right = insert(root->right, x);
+    }
     return root;
 }
+
+// Function for inorder traversal
 void inorder(Node* root) {
-    if (root) {
+    if (root != NULL) {
         inorder(root->left);
         cout << root->data << " ";
         inorder(root->right);
     }
 }
-int main() {
-    Node* root = nullptr;
+
+void main() {
+    clrscr(); // Clear the screen
+
+    Node* root = NULL; // Initialize the root node to NULL
+
+    // Insert elements into the BST
     root = insert(root, 50);
     insert(root, 30);
     insert(root, 20);
@@ -29,8 +47,11 @@ int main() {
     insert(root, 70);
     insert(root, 60);
     insert(root, 80);
-        cout << "Inorder Traversal: ";
+
+    // Display the inorder traversal of the BST
+    cout << "Inorder Traversal: ";
     inorder(root);
     cout << endl;
-    return 0;
+
+    getch(); // Wait for user input before closing
 }
