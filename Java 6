@@ -1,0 +1,60 @@
+Program 6: Contiguous memory allocation techniques 
+import java.util.Scanner;
+
+public class BestFitAllocation {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input memory blocks
+        System.out.print("Enter number of memory blocks: ");
+        int m = sc.nextInt();
+        int[] blockSize = new int[m];
+        boolean[] allocated = new boolean[m];
+
+        System.out.println("Enter sizes of memory blocks:");
+        for (int i = 0; i < m; i++) {
+            blockSize[i] = sc.nextInt();
+            allocated[i] = false;
+        }
+
+        // Input processes
+        System.out.print("Enter number of processes: ");
+        int p = sc.nextInt();
+        int[] processSize = new int[p];
+        int[] allocation = new int[p];
+
+        System.out.println("Enter sizes of processes:");
+        for (int i = 0; i < p; i++) {
+            processSize[i] = sc.nextInt();
+            allocation[i] = -1; // Initially, not allocated
+        }
+
+        // Best Fit Allocation Logic
+        for (int i = 0; i < p; i++) {
+            int bestIndex = -1;
+            for (int j = 0; j < m; j++) {
+                if (!allocated[j] && blockSize[j] >= processSize[i]) {
+                    if (bestIndex == -1 || blockSize[j] < blockSize[bestIndex]) {
+                        bestIndex = j;
+                    }
+                }
+            }
+            if (bestIndex != -1) {
+                allocation[i] = bestIndex;
+                allocated[bestIndex] = true;
+            }
+        }
+
+        // Output
+        System.out.println("\nProcess No.\tProcess Size\tBlock No.");
+        for (int i = 0; i < p; i++) {
+            System.out.print("  " + (i + 1) + "\t\t" + processSize[i] + "\t\t");
+            if (allocation[i] != -1)
+                System.out.println(allocation[i] + 1);  // Block numbers shown as 1-based
+            else
+                System.out.println("Not Allocated");
+        }
+
+        sc.close();
+    }
+}
